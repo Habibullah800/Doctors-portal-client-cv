@@ -7,13 +7,14 @@ const Banner = () => {
     <section
       style={{
         background: `url(${bg})`,
+        backgroundSize: "cover",
       }}
     >
       <div className="hero min-h-screen">
         <div className="hero-content flex-col lg:flex-row-reverse">
           <img
             src={chair}
-            className="lg:mr-32 max-w-sm rounded-lg  shadow-2xl"
+            className="lg:mr-32 lg:max-w-lg  rounded-lg  shadow-2xl"
             alt=""
           />
           <div className="lg:mr-20">

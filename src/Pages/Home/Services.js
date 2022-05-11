@@ -39,12 +39,12 @@ const Services = () => {
         </div>
       </div>
       <div className="mt-24 lg:ml-24">
-        <div class="lg:flex lg:items-center  card lg:card-side shadow-xl">
-          <figure className="w-96 ml-20">
+        <div className="lg:flex lg:items-center  card lg:card-side shadow-xl">
+          <figure className="lg:w-96 w-full lg:mx-16">
             <img src={treatment} alt="Album" />
           </figure>
-          <div class="card-body w-80 ml-10">
-            <h2 class="card-title text-5xl text-accent">
+          <div className="card-body lg:w-80 ">
+            <h2 className="card-title text-5xl text-accent">
               Exceptional Dental <br /> Care, on Your Terms
             </h2>
             <p>
@@ -55,8 +55,8 @@ const Services = () => {
               here', making it look like readable English. Many desktop
               publishing packages and web page
             </p>
-            <div class="card-actions  ">
-              <button class="btn btn-primary  uppercase text-white font-bold bg-gradient-to-r from-secondary to-primary">
+            <div className="card-actions  ">
+              <button className="btn btn-primary  uppercase text-white font-bold bg-gradient-to-r from-secondary to-primary">
                 Get Started
               </button>
             </div>
