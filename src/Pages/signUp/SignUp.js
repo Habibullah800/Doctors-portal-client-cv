@@ -1,52 +1,85 @@
 import React from "react";
 import {
-  useSignInWithEmailAndPassword,
+  useCreateUserWithEmailAndPassword,
   useSignInWithGoogle,
+  useUpdateProfile,
 } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
 import Loading from "../Shared/Loading";
 
-const Login = () => {
-  const navigate = useNavigate();
-  const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
-
+const SignUp = () => {
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
 
-  const [signInWithEmailAndPassword, user, loading, error] =
-    useSignInWithEmailAndPassword(auth);
+  const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
 
-  if (loading || gLoading) {
+  const [createUserWithEmailAndPassword, user, loading, error] =
+    useCreateUserWithEmailAndPassword(auth);
+
+  const [updateProfile, updating, upError] = useUpdateProfile(auth);
+
+  const navigate = useNavigate();
+
+  if (loading || gLoading || updating) {
     return <Loading />;
   }
 
   let signInError;
 
-  if (error || gError) {
+  if (error || gError || upError) {
     signInError = (
-      <p className="text-red-500"> {error?.message || gError?.message} </p>
+      <p className="text-red-500">
+        {" "}
+        {error?.message || gError?.message || upError?.message}{" "}
+      </p>
     );
   }
 
   if (user || gUser) {
-    navigate("/");
+    console.log(user);
   }
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log(data);
-    signInWithEmailAndPassword(data.email, data.password);
+    await createUserWithEmailAndPassword(data.email, data.password);
+    await updateProfile({ displayName: data.name });
+
+    navigate("/appointment");
   };
 
   return (
     <div className=" w-96 mx-auto my-20">
       <div className=" shadow-2xl card-body">
-        <h2 className="text-2xl font-bold text-center">Login</h2>
+        <h2 className="text-2xl font-bold text-center">Sign Up</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text">Name</span>
+            </label>
+            <input
+              type="text"
+              placeholder="Name"
+              className="input input-bordered"
+              {...register("name", {
+                required: {
+                  value: true,
+                  message: "Name is Required",
+                },
+              })}
+            />
+            <label className="label">
+              {errors.name?.type === "required" && (
+                <span className="label-text-alt text-red-500">
+                  {errors.name.message}
+                </span>
+              )}
+            </label>
+          </div>
           <div className="form-control">
             <label className="label">
               <span className="label-text">Email</span>
@@ -105,27 +138,22 @@ const Login = () => {
             {errors.password?.type === "minLength" && (
               <span className="text-red-500"> {errors.password.message} </span>
             )}
-            <label className="label">
-              <a href="#" className="label-text-alt link link-hover">
-                Forgot password?
-              </a>
-            </label>
           </div>
           {signInError}
           <div className="form-control mt-6">
             <input
               type="submit"
-              value="Login"
+              value="Sign Up"
               className="btn btn-accent text-lg font-normal"
             />
           </div>
         </form>
 
         <p className="text-center text-sm">
-          New to Doctors Portal?{" "}
-          <Link className="text-primary" to="/signup">
+          Already have an account?{" "}
+          <Link className="text-primary" to="/login">
             {" "}
-            Create new account{" "}
+            Login{" "}
           </Link>
         </p>
 
@@ -141,4 +169,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default SignUp;
