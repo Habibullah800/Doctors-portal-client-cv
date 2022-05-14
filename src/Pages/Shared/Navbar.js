@@ -30,6 +30,11 @@ const Navbar = () => {
       <li>
         <Link to="/about">About</Link>
       </li>
+      {user && (
+        <li>
+          <Link to="/dashboard">Dashboard</Link>
+        </li>
+      )}
       <li>
         {user ? (
           <button onClick={logOut} className="btn btn-ghost">
@@ -44,7 +49,7 @@ const Navbar = () => {
 
   return (
     <div>
-      <div className="navbar bg-base-100 lg:px-12 md:px-12 flex justify-between fixed top-0 z-30">
+      <div className="navbar bg-base-100 lg:px-12 md:px-12 flex justify-between ">
         <Link to="/" className="btn btn-ghost normal-case text-xl ">
           Doctors Portal
         </Link>

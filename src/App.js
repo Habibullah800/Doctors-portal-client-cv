@@ -10,12 +10,14 @@ import Login from "./Pages/login/Login";
 import Navbar from "./Pages/Shared/Navbar";
 import SignUp from "./Pages/login/SignUp";
 import RequireAuth from "./Pages/login/RequireAuth";
+import Dashboard from "./dashboard/Dashboard";
+import MyAppointments from "./dashboard/MyAppointments";
+import MyReview from "./dashboard/MyReview";
 
 function App() {
   return (
     <div>
       <Navbar />
-
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/home" element={<Home />}></Route>
@@ -30,6 +32,17 @@ function App() {
             </RequireAuth>
           }
         ></Route>
+        <Route
+          path="dashboard"
+          element={
+            <RequireAuth>
+              <Dashboard />
+            </RequireAuth>
+          }
+        >
+          <Route index element={<MyAppointments />}></Route>
+          <Route path="review" element={<MyReview />}></Route>
+        </Route>
       </Routes>
 
       <ToastContainer />
