@@ -44,9 +44,12 @@ const Navbar = () => {
 
   return (
     <div>
-      <div className="navbar bg-base-100 px-12">
-        <div className="navbar-start">
-          <div className="  dropdown">
+      <div className="navbar bg-base-100 lg:px-12 md:px-12 flex justify-between fixed top-0 z-30">
+        <Link to="/" className="btn btn-ghost normal-case text-xl ">
+          Doctors Portal
+        </Link>
+        <div className="navbar-end">
+          <div className="dropdown dropdown-end">
             <label tabIndex="0" className=" btn btn-ghost lg:hidden">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -70,9 +73,6 @@ const Navbar = () => {
               {menuItems}
             </ul>
           </div>
-          <Link to="/" className="btn btn-ghost normal-case text-xl ">
-            Doctors Portal
-          </Link>
         </div>
         <div className="navbar-end hidden lg:flex">
           <ul className="menu menu-horizontal p-0">{menuItems}</ul>
