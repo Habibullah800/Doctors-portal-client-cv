@@ -13,9 +13,9 @@ const AvailableAppointment = ({ date }) => {
     isLoading,
     refetch,
   } = useQuery(["available", formattedDate], () =>
-    fetch(`http://localhost:5000/available?date=${formattedDate}`).then((res) =>
-      res.json()
-    )
+    fetch(
+      `https://warm-spire-56947.herokuapp.com/available?date=${formattedDate}`
+    ).then((res) => res.json())
   );
 
   return (
