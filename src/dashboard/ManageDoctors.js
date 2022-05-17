@@ -1,46 +1,46 @@
 import React from "react";
 import { useQuery } from "react-query";
 import Loading from "../Pages/Shared/Loading";
-import UserRow from "./UserRow";
+import DoctorRow from "./DoctorRow";
 
-const Users = () => {
+const ManageDoctors = () => {
   const {
-    data: users,
+    data: doctors,
     isLoading,
     refetch,
-  } = useQuery("users", () =>
-    fetch("https://warm-spire-56947.herokuapp.com/user", {
-      method: "GET",
+  } = useQuery("doctors", () =>
+    fetch("http://localhost:5000/doctor", {
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
     }).then((res) => res.json())
   );
+
   if (isLoading) {
     return <Loading />;
   }
-
   return (
     <div>
-      <h2 className="text-2xl"> All Users: {users.length} </h2>
-      <div className="overflow-x-auto">
-        <table className="table w-full">
+      <h2 className="text-2xl">Mange Doctors: {doctors.length} </h2>
+      <div class="overflow-x-auto">
+        <table class="table w-full">
           <thead>
             <tr>
               <th></th>
+              <th>Avatar</th>
               <th>Name</th>
-              <th>Job</th>
-              <th>Favorite Color</th>
+              <th>Specialty</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
-            {users?.map((user, index) => (
-              <UserRow
-                key={user._id}
-                user={user}
+            {doctors.map((doctor, index) => (
+              <DoctorRow
+                key={doctor._id}
+                doctor={doctor}
                 index={index}
                 refetch={refetch}
-              ></UserRow>
+              ></DoctorRow>
             ))}
           </tbody>
         </table>
@@ -49,4 +49,4 @@ const Users = () => {
   );
 };
 
-export default Users;
+export default ManageDoctors;
