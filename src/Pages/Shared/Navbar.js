@@ -1,12 +1,14 @@
 import { signOut } from "firebase/auth";
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
 
 const Navbar = () => {
   const navigate = useNavigate();
   const [user] = useAuthState(auth);
+
+  const { pathname } = useLocation();
 
   const logOut = () => {
     signOut(auth);
@@ -50,12 +52,9 @@ const Navbar = () => {
 
   return (
     <div className="navbar bg-base-100 lg:px-12 md:px-12 flex justify-between ">
-      <Link to="/" className="btn btn-ghost normal-case text-xl ">
-        Doctors Portal
-      </Link>
-      <div className="navbar-end">
-        {/* sidebar */}
+      {/* sidebar */}
 
+      {pathname.includes("dashboard") && (
         <label htmlFor="my-drawer-2" className="btn btn-ghost lg:hidden">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -72,7 +71,12 @@ const Navbar = () => {
             />
           </svg>
         </label>
+      )}
 
+      <Link to="/" className="btn btn-ghost normal-case text-xl ">
+        Doctors Portal
+      </Link>
+      <div className="navbar-end">
         {/* menubar */}
         <div className="dropdown dropdown-end">
           <label tabIndex="0" className=" btn btn-ghost lg:hidden">

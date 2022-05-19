@@ -4,6 +4,7 @@ import fluoride from "../../assets/images/fluoride.png";
 import cavity from "../../assets/images/cavity.png";
 import whitening from "../../assets/images/whitening.png";
 import treatment from "../../assets/images/treatment.png";
+import { Link } from "react-router-dom";
 
 const Services = () => {
   return (
@@ -56,9 +57,12 @@ const Services = () => {
               publishing packages and web page
             </p>
             <div className="card-actions  ">
-              <button className="btn btn-primary  uppercase text-white font-bold bg-gradient-to-r from-secondary to-primary">
+              <Link
+                to="/appointment"
+                className="btn btn-primary  uppercase text-white font-bold bg-gradient-to-r from-secondary to-primary"
+              >
                 Get Started
-              </button>
+              </Link>
             </div>
           </div>
         </div>
