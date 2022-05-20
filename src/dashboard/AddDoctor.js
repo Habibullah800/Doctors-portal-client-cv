@@ -13,7 +13,9 @@ const AddDoctor = () => {
   } = useForm();
 
   const { data: services, isLoading } = useQuery("service", () =>
-    fetch("http://localhost:5000/service").then((res) => res.json())
+    fetch("https://warm-spire-56947.herokuapp.com/service").then((res) =>
+      res.json()
+    )
   );
 
   const imageStorageKey = "e87319b893efc024df17a99cb5180564";
@@ -46,7 +48,7 @@ YUP: to validate file: Search: Yup file validation for react hook form
             img: img,
           };
           // send to your database
-          fetch("http://localhost:5000/doctor", {
+          fetch("https://warm-spire-56947.herokuapp.com/doctor", {
             method: "POST",
             headers: {
               "content-type": "application/json",
