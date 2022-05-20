@@ -13,7 +13,11 @@ const CheckOutForm = ({ appointment }) => {
   const { _id, price, patient, patientName } = appointment;
 
   useEffect(() => {
-    fetch("https://warm-spire-56947.herokuapp.com/create-payment-intent", {
+    // const url = "http://localhost:5000/create-payment-intent";
+
+    const url = "https://warm-spire-56947.herokuapp.com/create-payment-intent";
+
+    fetch(url, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -75,7 +79,10 @@ const CheckOutForm = ({ appointment }) => {
         transactionId: paymentIntent.id,
       };
 
-      fetch(`https://warm-spire-56947.herokuapp.com/booking/${_id}`, {
+      const url = `https://warm-spire-56947.herokuapp.com/booking/${_id}`;
+      // const url = `http://localhost:5000/booking/${_id}`;
+
+      fetch(url, {
         method: "PATCH",
         headers: {
           "content-type": "application/json",

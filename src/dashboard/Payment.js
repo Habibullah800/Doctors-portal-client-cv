@@ -14,6 +14,8 @@ const Payment = () => {
   const { id } = useParams();
   const url = `https://warm-spire-56947.herokuapp.com/booking/${id}`;
 
+  // const url = `http://localhost:5000/booking/${id}`;
+
   const { data: appointment, isLoading } = useQuery(["booking", id], () =>
     fetch(url, {
       method: "GET",
