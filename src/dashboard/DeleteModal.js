@@ -13,7 +13,7 @@ const DeleteModal = ({ deletingDoctor, refetch, setDeletingDoctor }) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data.deleteCount) {
+        if (data.deletedCount) {
           toast.success(`Doctor: ${name} is deleted `);
           setDeletingDoctor(null);
           refetch();
